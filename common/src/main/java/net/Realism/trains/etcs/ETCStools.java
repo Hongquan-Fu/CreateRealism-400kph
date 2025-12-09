@@ -17,7 +17,7 @@ public class ETCStools {
      */
     public static float calculateNeedleRotation(double trainSpeed) {
         float rotationDegrees;
-
+        float speedKmh = (float) Math.abs(trainSpeed * 20 * 3.6f);
         if (speedKmh <= 200f) {
             rotationDegrees = -151.5f + (0.9f) * speedKmh;
         } else if (speedKmh >= 420f) {
