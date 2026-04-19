@@ -18,15 +18,15 @@ public class ETCStools {
      */
     public static float calculateNeedleRotation(double trainSpeed) {
         float rotationDegrees;
-        boolean useMph = RealismConfig.CLIENT.ETCSMPH.get();
-        float speed = (float) trainSpeed * 20 * 3.6f;
-        if (useMph){
-            speed =  speed * 0.621371192f;
-        }
-        if (speed <= 160f) {
-            rotationDegrees = -151.5f + (1.134f) * speed;
+
+        float speedKmh = (float) Math.abs(trainSpeed * 20 * 3.6f);
+
+        if (speedKmh <= 200f) {
+            rotationDegrees = -151.5f + (0.9f) * speedKmh;
+        } else if (speedKmh >= 420f) {
+            rotationDegrees = 138.5f;
         } else {
-            rotationDegrees = 30f + ((0.671f) * (speed - 160f));
+            rotationDegrees = 28.5f + ((0.5f) * (speedKmh - 200f));
         }
 
         return rotationDegrees;
@@ -46,17 +46,13 @@ public class ETCStools {
         float startAngleRad = -233.5f * (float)(Math.PI / 180);
         float endAngleRad;
 
-        if(maxSpeed > 300) {
-            maxSpeed = 300;
+        if(maxSpeed > 420) {
+            maxSpeed = 420;
         }
-        if(RealismConfig.CLIENT.ETCSMPH.get()) {
-            maxSpeed =  (maxSpeed * 0.621371192);
-        }
-
-        if (maxSpeed <= 160) {
-            endAngleRad = (float) ((-233.5f + (1.134f * maxSpeed)) * (float)(Math.PI / 180));
+        if (maxSpeed <= 200) {
+            endAngleRad = (float) ((-233.5f + (0.9f * maxSpeed)) * (float)(Math.PI / 180));
         } else {
-            endAngleRad = (float) ((-50f + (0.671f * (maxSpeed - 160f))) * (float)(Math.PI / 180));
+            endAngleRad = (float) ((-53.5f + (0.5f * (maxSpeed - 200f))) * (float)(Math.PI / 180));
         }
 
         // Extract color components

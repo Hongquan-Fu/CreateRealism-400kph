@@ -72,7 +72,7 @@ public class ETCS {
     private long lastKeyPressTime = 0;
     private static final long KEY_COOLDOWN_MS = 300;
 
-    private int trackspeedlimit = 300;
+    private int trackspeedlimit = 420;
     public ETCS(Train train) {
         this.train = train;
     }
@@ -127,7 +127,7 @@ public class ETCS {
         } else {
             // Reset speed limits when Tramways isn't loaded
             cachedSpeedLimits = new ArrayList<>();
-            trackspeedlimit = 300;
+            trackspeedlimit = 420;
         }
 
         float distance = (float) s.getDistanceToClosestOccupiedSignal();
